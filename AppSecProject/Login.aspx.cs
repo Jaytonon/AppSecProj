@@ -103,16 +103,16 @@ namespace AppSecProject
                             if (Session["Lock" + userid] == null)
                             {
                                 Session["Lock" + userid] = -2;
-                                int intAttempt = (int)Session["Lock" + userid];
+                                int tries = (int)Session["Lock" + userid];
                                 
                             }
 
                             else
                             {
-                                int intAttempt = (int)Session["Lock" + userid];
-                                intAttempt += 1;
-                                Session["Lock" + userid] = intAttempt;
-                                if (intAttempt > 0)
+                                int tries = (int)Session["Lock" + userid];
+                                tries += 1;
+                                Session["Lock" + userid] = tries;
+                                if (tries > 0)
                                 {
                                     SqlConnection connection = new SqlConnection(MYDBConnectionString);
                                     string sql = "UPDATE Account SET Lock = 1 WHERE Email=@Email";
